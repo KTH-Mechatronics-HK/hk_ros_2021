@@ -7,6 +7,10 @@
     <node name="republish" type="republish" pkg="image_transport" output="screen" args="compressed in:=/raspicam_node/image raw out:=/raspicam_node/image" /> 
 
     <!-- launch localization (hint: check out the preinstalled "turtlebot3_slam" package) -->
+	<include file="$(find turtlebot3_slam)/launch/turtlebot3_slam.launch">
+		<arg name="open_rviz" value="false"/>
+
+	</include>
 
     <!-- launch object A detector (april tags) --> 
  	<include file="$(find apriltag_ros)/launch/continuous_detection.launch">
