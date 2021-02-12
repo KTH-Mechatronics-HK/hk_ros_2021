@@ -19,6 +19,7 @@
 		<arg name="camera_frame" value="odom"/>
 
 	</include>
+
 	<!--remap tag_detection_image/image_topics /-->
 
 
@@ -30,3 +31,4 @@
     <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find hk_ros_2021)/rviz_config/hk_ros_2021.rviz"/>
 
 </launch>
+
