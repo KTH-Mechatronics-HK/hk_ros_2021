@@ -4,12 +4,12 @@ import math
 import tf
 import geometry_msgs.msg
 import tf2_ros
-from std_msgs.msg import String
+#from std_msgs.msg import String
 
 
 
 def callback8():   
-    #rospy.init_node('odom_tag8_subscriber_node')
+    rospy.init_node('odom_tag8_subscriber_node')
 
     listener = tf.TransformListener()
 
@@ -23,7 +23,7 @@ def callback8():
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             continue
 
-        print '[',trans[0]*(-1),',',trans[1]*(-1),']' 
+        #print '[',trans[0]*(-1),',',trans[1]*(-1),']' 
 					                		
  	
 	x8 = str(trans[0]*(-1))            #Multiply with -1 to transform the given coordinates

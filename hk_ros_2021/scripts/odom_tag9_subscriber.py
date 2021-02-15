@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import rospy
 import math
 import tf
@@ -17,9 +18,9 @@ import tf2_ros
 def callback():   
     rospy.init_node('odom_tag9_subscriber_node')
     #msg = rospy.wait_for_message("/apriltag_ros.msg", AprilTagDetectionArray)
-    #listener = tf.TransformListener()
+    listener = tf.TransformListener()
 
-    #rate = rospy.Rate(1) #one message per second
+    rate = rospy.Rate(1) #one message per second
     #a = msg
     #print AprilTagDetectionArray
 
@@ -37,7 +38,7 @@ def callback():
 	x = str(trans[0]*(-1))            #Multiply with -1 to transform the given coordinates
 	y = str(trans[1]*(-1))            #to match the odom frame orientation
 	coordinates = x + ", " + y
-        rate.sleep()
+        #rate.sleep()
 	return coordinates
 	
 if __name__ == '__main__':

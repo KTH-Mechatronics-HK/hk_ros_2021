@@ -20,7 +20,7 @@ def callback():
     rospy.init_node('odom_tag9',anonymous = True)
     #msg = rospy.wait_for_message("/std_msgs.msg", String)
     listener = tf.TransformListener()
-    rate = rospy.Rate(10) # 10hz
+    rate = rospy.Rate(1) # 10hz
   
     #rate = rospy.Rate(1) #one message per second
     #a = msg.coordinates
@@ -39,14 +39,15 @@ def callback():
  	
 	x = str(trans[0]*(-1))            #Multiply with -1 to transform the given coordinates
 	y = str(trans[1]*(-1))            #to match the odom frame orientation
-	coordinates = (x + ", " + y) #% rospy.get_time()
+	coordinates = (x + ", " + y)#%rospy.get_time()
         rospy.loginfo(coordinates)
         pub.publish(coordinates)
         rate.sleep()
 	
 if __name__ == '__main__':
-        try:
-           callback()
-	except rospy.ROSInterruptException:
-           pass
+   try:
+       callback()
+   except rospy.ROSInterruptException:
+       pass
+	
 	

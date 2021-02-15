@@ -20,8 +20,8 @@
 	<include file="$(find apriltag_ros)/launch/continuous_detection.launch">
 		<arg name="camera_name" value="raspicam_node"/>
 		<arg name="image_topic" value="image"/>
-		<arg name="camera_frame" value="camera_rgb_optical_frame" />
-	
+		<arg name="camera_frame" value="camera_rgb_optical_frame"/>
+
 		
 	</include> 
 	
@@ -29,12 +29,16 @@
     <!-- launch object B detector (geometric shapes) -->
 
     <!-- launch object C detector (animals) -->
+	
 
     <!-- launch rviz -->
     <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find hk_ros_2021)/rviz_config/hk_ros_2021.rviz"/>   
     
+  
    
-    <!--<node pkg="hk_ros_2021" name="Detection_coordinates" type="output_generation_template.py" output="screen"> 
-   </node> -->
+    <!--<node pkg="hk_ros_2021" name="tag9" type="odom_tag9_subscriber.py" output="screen"></node> -->
+    <!-- <node pkg="hk_ros_2021" name="tag8" type="odom_tag8_subscriber.py" output="screen"></node> -->
+    
+    <node pkg="hk_ros_2021" name="Detection_coordinates" type="output_generation_template.py" output="screen"></node>
 
 </launch>
