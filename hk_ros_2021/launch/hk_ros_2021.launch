@@ -7,14 +7,34 @@
     <node name="republish" type="republish" pkg="image_transport" output="screen" args="compressed in:=/raspicam_node/image raw out:=/raspicam_node/image" /> 
 
     <!-- launch localization (hint: check out the preinstalled "turtlebot3_slam" package) -->
+	<include file="$(find turtlebot3_slam)/launch/turtlebot3_slam.launch">
+		<arg name="open_rviz" value="false"/>
+		
 
+	</include>
+	
+
+	
+	
     <!-- launch object A detector (april tags) --> 
+	<include file="$(find apriltag_ros)/launch/continuous_detection.launch">
+		<arg name="camera_name" value="raspicam_node"/>
+		<arg name="image_topic" value="image"/>
+		<arg name="camera_frame" value="camera_rgb_optical_frame" />
+	
+		
+	</include> 
+	
 
     <!-- launch object B detector (geometric shapes) -->
 
     <!-- launch object C detector (animals) -->
 
     <!-- launch rviz -->
-    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find hk_ros_2021)/rviz_config/hk_ros_2021.rviz"/>
+    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find hk_ros_2021)/rviz_config/hk_ros_2021.rviz"/>   
+    
+   
+    <!--<node pkg="hk_ros_2021" name="Detection_coordinates" type="output_generation_template.py" output="screen"> 
+   </node> -->
 
 </launch>
