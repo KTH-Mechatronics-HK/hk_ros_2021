@@ -15,7 +15,7 @@ import tf2_ros
 
 
 
-def callback():   
+def callback():
     rospy.init_node('odom_tag9_subscriber_node')
     #msg = rospy.wait_for_message("/apriltag_ros.msg", AprilTagDetectionArray)
     listener = tf.TransformListener()
@@ -25,23 +25,21 @@ def callback():
     #print AprilTagDetectionArray
 
     #listener.waitForTransform('/odom', '/tag_9', rospy.Time(), rospy.Duration(60))
-    
+
     while not rospy.is_shutdown():
         try:
             (trans,rot) = listener.lookupTransform('/odom', '/tag_9' , rospy.Time(0))
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             continue
 
-        #print '[',trans[0]*(-1),',',trans[1]*(-1),']' 
-				                		
- 	
+        #print '[',trans[0]*(-1),',',trans[1]*(-1),']'
+
+
 	x = str(trans[0]*(-1))            #Multiply with -1 to transform the given coordinates
 	y = str(trans[1]*(-1))            #to match the odom frame orientation
 	coordinates = x + ", " + y
         #rate.sleep()
-	return coordinates
-	
+	#return coordinates
+
 if __name__ == '__main__':
 	callback()
-
-	
