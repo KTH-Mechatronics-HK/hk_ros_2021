@@ -7,7 +7,7 @@ import rospkg
 #import odom_tag9_subscriber 				#Import the odom_tag9_subscriber node
 import rospy
 #import odom_tag8_subscriber
-import tagdetect2
+import tagdetect3
 detections = []
 
 
@@ -18,7 +18,7 @@ def callback2(data):
 # 1 create an empty list to store the detections
 	while(1):
 
-		xy = tagdetec2.callback()  		#Read the return value
+		xy = tagdetec3.callback()  		#Read the return value
 	#xy8 = odom_tag8_subscriber.callback8()
 	#msg = rospy.wait_for_message("/std_msgs.msg", String)
 	#cord = msg.coordinate

@@ -14,17 +14,19 @@ from std_msgs.msg import String
 #include <apriltags_ros/AprilTagDetectionArray.h>
 from apriltag_ros.msg import AprilTagDetectionArray
 
+from std_msgs.msg import String
 
-rospy.init_node('odom_tag9',anonymous = True)
+rospy.init_node('Coordinates_node',anonymous = True)
 list = tf.TransformListener()
 
 def callback(detectionarray):
 
 
     #pub = rospy.Subscriber('tag_detections', AprilTagDetection , chatter_callback)
-
+    #rospy.init_node('odom_tag9',anonymous = True)
     #msg = rospy.wait_for_message("/tag_detections", Pose)
-
+    pub = rospy.Publisher('chatter', String, queue_size=10)  #Create a chatter node, so we can retrieve coordinates into yaml file
+    #rospy.init_node('talker', anonymous=True)
     #list = tf.TransformListener()
     #rate = rospy.Rate(1) # 10hz
 
@@ -42,16 +44,27 @@ def callback(detectionarray):
 
         coordinates = (x + ", " + y)  #Combining x and y coordinates into a string
         print(coordinates)
-        return coordinates
+        #return coordinates
 
     except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException, IndexError):
-        return None
+        return
+    #return coordinates
+
+
+    try:
+        pub.publish(coordinates)   #Publishing coordinates onto the "chatter" topic for the yaml file to read.
+
+    except rospy.ROSInterruptException:
+        pass
+
 
     #tag_frame = "tag_"+frame_id[1:2]        #Getting the number out of frame_id
     #print(frame_id)
     #print(tag_frame
     #list.waitForTransform('/odom', tag_frame, rospy.Time(), rospy.Duration(1))
     #(trans,rot) = list.lookupTransform( '/odom',tag_frame , rospy.Time(0))
+#!/usr/bin/env python
+# license removed for brevity
 
     #x = str(trans[0]*(-1))            #Multiply with -1 to transform the given coordinates
     #y = str(trans[1]*(-1))            #to match the odom frame orientation
@@ -75,16 +88,22 @@ def callback(detectionarray):
 	#print coordinates
 	#return coordinates
 
-def listener():
+#def listener():
    #try:
-	   #rospy.init_node('odom_tag9',anonymous = True)
+	    #rospy.init_node('odom_tag9',anonymous = True)
 
-        pub = rospy.Subscriber('/tag_detections', AprilTagDetectionArray , callback)
+        #pub = rospy.Subscriber('/tag_detections', AprilTagDetectionArray , callback)
 
    #rate = rospy.Rate(1) # 10hz
-        rospy.spin()
+        #rospy.spin()
    #except rospy.ROSInterrupException:
       #rospy.loginfo("node terminated.")
 
 if __name__ == '__main__':
-    listener()
+
+    #rospy.init_node('odom_tag9',anonymous = True)
+
+    pub = rospy.Subscriber('/tag_detections', AprilTagDetectionArray , callback)
+
+   #rate = rospy.Rate(1) # 10hz
+    rospy.spin()
