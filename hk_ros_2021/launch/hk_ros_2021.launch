@@ -32,7 +32,7 @@
 
 
     <!-- launch rviz -->
-<<<<<<< HEAD
+
     <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find hk_ros_2021)/rviz_config/hk_ros_2021.rviz"/>   
     
    
@@ -40,12 +40,13 @@
     <!-- <node pkg="hk_ros_2021" name="tag8" type="odom_tag8_subscriber.py" output="screen"></node> -->
     
     <node pkg="hk_ros_2021" name="Detection_coordinates" type="output_generation_template.py" output="screen"></node> 
-=======
+
+
     <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find hk_ros_2021)/rviz_config/hk_ros_2021.rviz"/>
 
       <!--<node pkg="hk_ros_2021" name="tag9" type="odom_tag9_subscriber.py" output="screen"></node> -->
       <!-- <node pkg="hk_ros_2021" name="tag8" type="odom_tag8_subscriber.py" output="screen"></node> -->
       <!--<node pkg="hk_ros_2021" name="Detection_coordinates" type="output_generation_template.py" output="screen"></node> -->
->>>>>>> e822fefc6687213372b2955c9332625bcb599905
+
 
 </launch>
