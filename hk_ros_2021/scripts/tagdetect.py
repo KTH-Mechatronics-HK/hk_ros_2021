@@ -4,6 +4,7 @@ import math
 import tf
 import geometry_msgs.msg
 import tf2_ros
+#import tf2
 #from nav_msgs.msg import Odometry
 #from tf.msg import tfMessage
 
@@ -14,28 +15,73 @@ import tf2_ros
 from apriltag_ros.msg import AprilTagDetectionArray
 from tf2_msgs.msg import TFMessage
 
+rospy.init_node('odom_tag9',anonymous = True)
 
-
+#global list
+list = tf.TransformListener()
+tf_buffer = tf2_ros.Buffer(rospy.Duration(1000))
+listener = tf2_ros.TransformListener(tf_buffer)
 
 def callback(detectionarray):
 
     #pub = rospy.Subscriber('tag_detections', AprilTagDetection , chatter_callback)
-    rospy.init_node('odom_tag9',anonymous = True)
+    #rospy.init_node('odom_tag9',anonymous = True)
     #msg = rospy.wait_for_message("/tag_detections", Pose)
-
-    list = tf.TransformListener()
+    #rospy.init_node('odom_tag9',anonymous = True)
+    #buffer = tf2_ros.Buffer()
+    #list = tf.TransformListener()
     #rate = rospy.Rate(1) # 10hz
-
-    #rate = rospy.Rate(1) #one message per second
+    #userdata.marker_pose.header.stamp = rospy.Time.now()
+    #rate = rospy.Rate(10) #one message per second
+    #list = tf.TransformListener()
+    #list.waitForTransform("/odom", detectionarray.detections[0].pose.header.frame_id , rospy.Time(), rospy.Duration(0.1));
     try:
-        frame_id = str(detectionarray.detections[0].id)
+        #list.waitForTransform("/odom","/tag_9", rospy.Time(), rospy.Duration(3.0));
+
+        detectionarray.detections[0].pose.header.frame_id = "camera_rgb_optical_frame"
+        pose = detectionarray.detections[0].pose
+        #pose.header.stamp = rospy.Time.now()
+        #y = detectionarray.detections[0].pose.pose.pose.position.y
+        #posse = detectionarray.detections[0].pose.pose.pose
+        #test = detectionarray.detections[0].pose.header
+        #trans = tf_buffer.transform(pose, "odom")
+        #trans = tf_buffer.transform(pose, "odom" )
+        #co = list.transformPose("/odom", pose)
+        #(trans,rot) = list.lookupTransform('/odom', pose, rospy.Time(0))
+        #(trans,rot) = list.lookupTransform('/odom', pose , rospy.Time(0))
+        co = list.transformPose("/odom", pose)
     except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException, IndexError):
         return
+    #list.waitForTransform("/odom", detectionarray.detections[0].pose.header.frame_id , rospy.Time(), rospy.Duration(1));
+    #co = list.transformPose("/odom", pose)
+    #co = list.transformPose('/map', pose)
+    #x = str(trans[0]*(-1))
+    #y = str(trans[1]*(-1))
+    #coordinates = (x + ", " + y)
+    #co = list.transformPose("/odom", pose)
+    print(co)
+    #return coordinates
 
+    #return coordinates
+    #list.waitForTransform("/odom", detectionarray.detections[0].pose.header.frame_id , rospy.Time(), rospy.Duration(1));
+    #co = list.transformPose('/odom', pose)
+    #hej = str(co[0])
+    #print(hej)
+    #print(co)
+    #co = list.transformPose('/odom', pose)
 
-    tag_frame = "tag_"+frame_id[1:2]        #Getting the number out of frame_id
-    print(frame_id)
-    print(tag_frame)
+    #print(co)
+
+    #x = str(trans[0])
+    #print(co[0])
+    #print(co[0])
+    #(trans,rot) = list.lookupTransform( '/odom', '/pose' , rospy.Time(0))
+    #tag_frame = "/tag_"+frame_id[1:2]       #Getting the number out of frame_id
+    #print(frame_id)
+    #print(tag_frame)
+    #cordinates = x+", "+y
+    #print cordinates
+    #print(pose)
 
     #listener.waitForTransform('/odom', tag, rospy.Time(), rospy.Duration(60))
 
@@ -43,10 +89,10 @@ def callback(detectionarray):
         #try:
     #try:
     #rospy.sleep(10.0)
-    (trans,rot) = list.lookupTransform( '/odom','/tag_9' , rospy.Time(0))
+
     #x = str(trans[0]*(-1))            #Multiply with -1 to transform the given coordinates
     #y = str(trans[1]*(-1))            #to match the odom frame orientation
-    print trans
+    #print trans
 
     #except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException, IndexError):
         #pass
@@ -61,13 +107,15 @@ def callback(detectionarray):
 	#print coordinates
 	#return coordinates
 
-def listener():
+#def listener():
    #try:
 	   #rospy.init_node('odom_tag9',anonymous = True)
-        rospy.init_node('odom_tag9',anonymous = True)
-        list = tf.TransformListener()
-        pub = rospy.Subscriber('/tf', TFMessage)
-        pub = rospy.Subscriber('/tag_detections', AprilTagDetectionArray , callback)
+
+
+
+        #list = tf.TransformListener()
+        #pub = rospy.Subscriber('/tf', TFMessage)
+        pub = rospy.Subscriber('/tag_detections', AprilTagDetectionArray, callback)
 
    #rate = rospy.Rate(1) # 10hz
         rospy.spin()
@@ -75,7 +123,11 @@ def listener():
       #rospy.loginfo("node terminated.")
 
 if __name__ == '__main__':
-    listener()
+    #listener()
+    pub = rospy.Subscriber('/tag_detections', AprilTagDetectionArray, callback)
+
+#rate = rospy.Rate(1) # 10hz
+    rospy.spin()
 
 #for i = 1:N
  #   tag_data.t(i) = getBagTime(tag_msg{i})-t0;

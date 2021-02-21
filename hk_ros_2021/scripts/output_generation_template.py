@@ -6,13 +6,13 @@ import yaml
 import rospkg
 #import tagdetect				#Import the odom_tag9_subscriber node
 #import rospy
-import tagdetect2
-
+import tagdetecttest.py
+from tagdetecttest.py import coordinates
 detections = []
 
 # 1 create an empty list to store the detections
 while(1):
-	#xy = tagdetect2.callback(lambda: callback(detectionarray))		#Read the return value
+	#xy = tagdetecttest.callback()		#Read the return value
 
 	#xy8 = odom_tag8_subscriber.callback8()
 
@@ -20,7 +20,7 @@ while(1):
 # remember to add logic to avoid duplicates
 
 # first dummy detection (apriltag)
-	detections.append({"obj_type": "A", "XY_pos": xy})
+	detections.append({"obj_type": "A", "XY_pos": coordinates})
 	#detections.append({"obj_type": "A8", "XY_pos": xy8})
 
 
