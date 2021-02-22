@@ -13,8 +13,9 @@ from std_msgs.msg import String
 #from AprilTagDetectionArray.msg import AprilTagDetection
 #include <apriltags_ros/AprilTagDetectionArray.h>
 from apriltag_ros.msg import AprilTagDetectionArray
-
+from apriltag_ros.msg import Coordinates
 from std_msgs.msg import String
+
 
 rospy.init_node('Coordinates_node',anonymous = True)
 list = tf.TransformListener()
@@ -25,7 +26,7 @@ def callback(detectionarray):
     #pub = rospy.Subscriber('tag_detections', AprilTagDetection , chatter_callback)
     #rospy.init_node('odom_tag9',anonymous = True)
     #msg = rospy.wait_for_message("/tag_detections", Pose)
-    pub = rospy.Publisher('chatter', String, queue_size=10)  #Create a chatter node, so we can retrieve coordinates into yaml file
+    pub = rospy.Publisher('chatter', Coordinates, queue_size=10)  #Create a chatter node, so we can retrieve coordinates into yaml file
     #rospy.init_node('talker', anonymous=True)
     #list = tf.TransformListener()
     #rate = rospy.Rate(1) # 10hz
@@ -50,9 +51,13 @@ def callback(detectionarray):
         return
     #return coordinates
 
+    coordinates_info = Coordinates()
+
+    coordinates_info.coord = coordinates
+    coordinates_info.tag = tag_frame
 
     try:
-        pub.publish(coordinates)   #Publishing coordinates onto the "chatter" topic for the yaml file to read.
+        pub.publish(coordinates_info)   #Publishing coordinates onto the "chatter" topic for the yaml file to read.
 
     except rospy.ROSInterruptException:
         pass

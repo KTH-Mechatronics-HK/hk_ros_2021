@@ -7,6 +7,7 @@ import rospkg
 #import tagdetect				#Import the odom_tag9_subscriber node
 import rospy
 from std_msgs.msg import String
+from apriltag_ros.msg import Coordinates
 
 
 detections = []
@@ -14,8 +15,9 @@ detections = []
 # 1 create an empty list to store the detections
 def callback2(data):
     #print(data.data)
-	
-    xy = data.data  ##Retrieve coordinates
+
+    xy = data.coord  ##Retrieve coordinates
+    tag = data.tag
     print(xy)
     		#Read the return value
     #print(xy)
@@ -26,7 +28,7 @@ def callback2(data):
 # remember to add logic to avoid duplicates
 
 # first dummy detection (apriltag)
-    detections.append({"obj_type": "A", "XY_pos": xy})
+    detections.append({"obj_type": "A","Tag": tag, "XY_pos": xy})
 	#detections.append({"obj_type": "A8", "XY_pos": xy8})
 
 
@@ -45,9 +47,9 @@ def callback2(data):
       yaml.dump_all(detections, outfile,explicit_start=True)
 if __name__ == '__main__':
 
-    
+
     rospy.init_node('yaml_node',anonymous = True)
-    pub = rospy.Subscriber('chatter', String , callback2)
+    pub = rospy.Subscriber('chatter', Coordinates , callback2)
 
     #rate = rospy.Rate(1) # 10hz
     rospy.spin()
