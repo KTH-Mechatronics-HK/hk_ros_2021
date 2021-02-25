@@ -37,11 +37,11 @@ def callback(detectionarray):
         frame_id = str(detectionarray.detections[0].id)  #Getting the tag number number out of frame_id
         tag_frame = "tag_"+frame_id[1:2]      #making string in format tag_(tagnumber)
 
-        list.waitForTransform('/odom', tag_frame, rospy.Time(), rospy.Duration(1)) #Waiting for a bit to get rid of errors
-        (trans,rot) = list.lookupTransform( '/odom',tag_frame , rospy.Time(0)) #performing the transformation
-
-        x = str(trans[0]*(-1))            #Multiply with -1 to transform the given coordinates
-        y = str(trans[1]*(-1))            #to match the odom frame orientation
+        list.waitForTransform('/static_frame', tag_frame, rospy.Time(), rospy.Duration(1)) #Waiting for a bit to get rid of errors
+        (trans,rot) = list.lookupTransform( '/static_frame',tag_frame , rospy.Time(0)) #performing the transformation
+	
+        x = str(trans[0])            #Multiply with -1 to transform the given coordinates
+        y = str(trans[1])            #to match the odom frame orientation
 
         coordinates = (x + ", " + y)  #Combining x and y coordinates into a string
         print(coordinates)

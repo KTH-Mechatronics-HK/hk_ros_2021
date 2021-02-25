@@ -6,7 +6,9 @@
     <!-- uncompress camera feed -->
     <node name="republish" type="republish" pkg="image_transport" output="screen" args="compressed in:=/raspicam_node/image raw out:=/raspicam_node/image" />
 
-
+    <!-- Launch a static_frame to get more accurate transformations-->
+    <node pkg="tf" type="static_transform_publisher" name="static_frame_broadcaster" args="0 0 0 3.31 0 0 /map /static_frame 100" /> <!--Tested rotations: 3.31, 3.4, 3.35 -->
+                                                                                                                                     <!-- 3.31 gave the best result-->
     <!-- launch localization (hint: check out the preinstalled "turtlebot3_slam" package) -->
 	<include file="$(find turtlebot3_slam)/launch/turtlebot3_slam.launch">
 		<arg name="open_rviz" value="false"/>
