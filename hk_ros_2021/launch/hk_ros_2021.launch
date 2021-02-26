@@ -32,7 +32,7 @@
 	<!--commented theses stuff below out since I dont have darknet_ros installed yet-->
 
  	<include file="$(find darknet_ros)/launch/yolo_v3.launch">
-      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov3.yaml"/> 
+      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov2-tiny-voc.yaml"/>
       	<arg name="image" value="raspicam_node/image"/>
   	</include>
 
@@ -46,7 +46,7 @@
     <node pkg="hk_ros_2021" name="Tagdetect" type="tagdetect3.py" output="screen"></node>
 
    <!-- Node which subscribes to to the topic thats made inside Tagdetect node to write down coordines into yaml file-->
-   <node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node> 
+   <node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node>
 
 
 

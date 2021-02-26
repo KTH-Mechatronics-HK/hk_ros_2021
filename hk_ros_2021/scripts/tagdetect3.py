@@ -39,7 +39,7 @@ def callback(detectionarray):
 
         list.waitForTransform('/static_frame', tag_frame, rospy.Time(), rospy.Duration(1)) #Waiting for a bit to get rid of errors
         (trans,rot) = list.lookupTransform( '/static_frame',tag_frame , rospy.Time(0)) #performing the transformation
-	
+
         x = str(trans[0])            #Multiply with -1 to transform the given coordinates
         y = str(trans[1])            #to match the odom frame orientation
 

@@ -13,7 +13,7 @@ from apriltag_ros.msg import Coordinates
 
 #detections = []
 detections ={
-             "tag_0": "None" , ##Depending on which info we decide to send from 
+             "tag_0": "None" , ##Depending on which info we decide to send from
              "tag_1": "None" , ##shape detection/animal detection this dictionary
 	     "tag_2": "None" , ##might have to be changed a bit.
 	     "tag_3": "None" ,
@@ -22,29 +22,29 @@ detections ={
              "tag_6": "None" ,
              "tag_7": "None" ,
              "tag_8": "None" ,
-             "tag_9": "None" 
+             "tag_9": "None"
 }
-		
+
 # 1 create an empty list to store the detections
 def callback2(data):
     #print(data.data)
 
     xy = data.coord  #Retrieve coordinates
     tag = data.tag   #Retrieve tag number
-    
-    
+
+
     detections[tag] = xy  #Insert coordinates depending on tag number
 
-    
-   
+
+
 # 2 append detections during the run
 # remember to add logic to avoid duplicates
 
 # first dummy detection (apriltag)
 #detections.append({"obj_type": "A","Tag": tag, "XY_pos": xy})
-	
-    
-    
+
+
+
 # second dummy detection (geometric shape)
 #detections.append({"obj_type": "B", "XY_pos": [3.396,0.123]})
 
@@ -59,7 +59,7 @@ def callback2(data):
       yaml.dump(detections, outfile, default_flow_style=False)
      #yaml.dump_all(detections, outfile,explicit_start=True)
      #explicit_start=True
-     
+
 if __name__ == '__main__':
 
 
