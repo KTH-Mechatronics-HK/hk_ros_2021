@@ -28,10 +28,10 @@
 	
 	<!--commented theses stuff below out since I dont have darknet_ros installed yet-->
 
-	<!--<include file="$(find darknet_ros)/launch/yolo_v3.launch">-->
-      	<!--<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov3.yaml"/>-->  <!-- Simplified config .yaml file with fewer items-->
-      	<!--<arg name="image" value="raspicam_node/image"/>-->
-  	<!--</include>-->
+	<include file="$(find darknet_ros)/launch/yolo_v3.launch">
+      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov3.yaml"/>
+      	<arg name="image" value="raspicam_node/image"/>
+  	</include>
 
 
     <!-- launch rviz -->
