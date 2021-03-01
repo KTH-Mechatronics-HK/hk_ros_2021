@@ -7,7 +7,11 @@ import tf2_ros
 from sensor_msgs.msg import LaserScan
 from darknet_ros_msgs.msg import BoundingBox #msg that contains bounding box coordinates
 from darknet_ros_msgs.msg import BoundingBoxes
+<<<<<<< HEAD
 from apriltag_ros.msg import animalpixels
+=======
+from apriltag_ros.msg import Coordinates
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
 from std_msgs.msg import String
 #rostopic echo darknet_ros/bounding_boxes...
 #std_msgs/Header header
@@ -50,7 +54,10 @@ class lidar:
         self.lidar_angle = None
         self.ranges = []
         self.new_value = 0 #Not used
+<<<<<<< HEAD
         self.animaltag = None
+=======
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
     def callback1(self, animalBox): #function for calculating relative
 
         angleScale = 320/26.75
@@ -58,6 +65,7 @@ class lidar:
 
 
         try:
+<<<<<<< HEAD
 
             animalType = str(animalBox.bounding_boxes[0].Class)
 
@@ -65,6 +73,13 @@ class lidar:
             if animalType in ['cat', 'cow', 'dog', 'horse']: #if class is one of these animals
                 print(animalType)
                 self.animaltag = str(animalBox.bounding_boxes[0].Class)
+=======
+            animalType = str(animalBox.bounding_boxes[0].Class)
+
+            #CALCULATING
+            if animalType in ['cat', 'cow', 'dog', 'horse', 'boat']: #if class is one of these animals
+                print(animalType)
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
                 x_max = animalBox.bounding_boxes[0].xmax
                 x_min = animalBox.bounding_boxes[0].xmin
 
@@ -126,13 +141,21 @@ class lidar:
         return
 
     def get_hit(self):
+<<<<<<< HEAD
         pub = rospy.Publisher('animal_info', animalpixels, queue_size=10)
+=======
+        pub = rospy.Publisher('animal_info', Coordinates, queue_size=10)
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
 
         animalDistance = self.ranges[self.lidar_angle]
         print(animalDistance)
         #x_cord = math.cosd(self.lidar_angle)*animalDistance
         #y_cord = math.sind(self.lidar_angle)*animalDistance
+<<<<<<< HEAD
         animal_coord_info = animalpixels()
+=======
+        animal_coord_info = Coordinates()
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
 
         x_cord = math.cos(math.radians(self.lidar_angle))*animalDistance
         y_cord = math.sin(math.radians(self.lidar_angle))*animalDistance
@@ -141,7 +164,10 @@ class lidar:
         #
         animal_coord_info.animal_x = x_cord #might be good for geometric
         animal_coord_info.animal_y = y_cord
+<<<<<<< HEAD
         animal_coord_info.animaltag = self.animaltag
+=======
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
         #
         try:
             pub.publish(animal_coord_info)   #Publishing coordinates onto the "chatter" topic for the yaml file to read.

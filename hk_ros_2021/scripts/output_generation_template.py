@@ -23,14 +23,19 @@ detections ={
              "tag_6": "None" ,
              "tag_7": "None" ,
              "tag_8": "None" ,
+<<<<<<< HEAD
              "tag_9": "None" ,
              "boat" : "None"
+=======
+             "tag_9": "None"
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
 }
 
 # 1 create an empty list to store the detections
 def callbackA(data):
     #print(data.data)
 
+<<<<<<< HEAD
     xyA = data.coord  #Retrieve coordinates
     tagA = data.tag   #Retrieve tag number
 
@@ -39,11 +44,27 @@ def callbackA(data):
 
     detections[tagA] = xyA  #Insert coordinates depending on tag number
 
+=======
+    xy = data.coord  #Retrieve coordinates
+    tag = data.tag   #Retrieve tag number
+
+
+    detections[tag] = xy  #Insert coordinates depending on tag number
+
+
+
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
 # 2 append detections during the run
 # remember to add logic to avoid duplicates
 
 # first dummy detection (apriltag)
+<<<<<<< HEAD
     #detections.append({"obj_type": "A","Tag": tagA, "XY_pos": xyA})
+=======
+#detections.append({"obj_type": "A","Tag": tag, "XY_pos": xy})
+
+
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
 
 # second dummy detection (geometric shape)
 #detections.append({"obj_type": "B", "XY_pos": [3.396,0.123]})
@@ -59,8 +80,13 @@ def callbackA(data):
       yaml.dump(detections, outfile, default_flow_style=False)
      #yaml.dump_all(detections, outfile,explicit_start=True)
      #explicit_start=True
+<<<<<<< HEAD
 def callbackC(data):
     #print(data.data)
+=======
+
+if __name__ == '__main__':
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
 
     #xyC = data.animal_coord  #Retrieve coordinates
     tagC = data.animaltag   #Retrieve tag number
