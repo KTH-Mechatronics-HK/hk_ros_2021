@@ -1,20 +1,69 @@
 <launch>
 
-    <!-- set /use_sim_time true if replaying bag  (also remember clock flag for rosbag play) --> 
+    <!-- set /use_sim_time true if replaying bag  (also remember clock flag for rosbag play) -->
     <param name="/use_sim_time" value="true"/>
 
     <!-- uncompress camera feed -->
-    <node name="republish" type="republish" pkg="image_transport" output="screen" args="compressed in:=/raspicam_node/image raw out:=/raspicam_node/image" /> 
+    <node name="republish" type="republish" pkg="image_transport" output="screen" args="compressed in:=/raspicam_node/image raw out:=/raspicam_node/image" />
 
+    <!-- Launch a static_frame to get more accurate transformations-->
+    <node pkg="tf" type="static_transform_publisher" name="static_frame_broadcaster" args="0 0 0 3.31 0 0 /map /static_frame 100" /> <!--Tested rotations: 3.31, 3.4, 3.35 -->
+                                                                                                                                     <!-- 3.31 gave the best result-->
     <!-- launch localization (hint: check out the preinstalled "turtlebot3_slam" package) -->
+	<include file="$(find turtlebot3_slam)/launch/turtlebot3_slam.launch">
+		<arg name="open_rviz" value="false"/>
 
-    <!-- launch object A detector (april tags) --> 
+	</include>
+
+
+    <!-- launch object A detector (april tags) -->
+	<include file="$(find apriltag_ros)/launch/continuous_detection.launch">
+		<arg name="camera_name" value="raspicam_node"/>
+		<arg name="image_topic" value="image"/>
+		<arg name="camera_frame" value="camera_rgb_optical_frame"/>
+  	</include>
+
+<!--	<node pkg="hk_ros_2021" name="animalDetect_node" type="animal_location_test.py" output="screen"></node> -->
+	<!--<node pkg="hk_ros_2021" name="animaltransform" type="animalTransform.py" output="screen"></node>-->
+
 
     <!-- launch object B detector (geometric shapes) -->
 
+ 	<node pkg="shape_detection_matching" name="shape_node" type="shape_detector_node.py"></node>
+
+
     <!-- launch object C detector (animals) -->
 
+	<!--commented theses stuff below out since I dont have darknet_ros installed yet-->
+
+ 	<include file="$(find darknet_ros)/launch/yolo_v3.launch">
+<<<<<<< HEAD
+      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov2-voc.yaml"/>
+=======
+      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov2-tiny-voc.yaml"/>
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
+      	<arg name="image" value="raspicam_node/image"/>
+  	</include>
+
+
     <!-- launch rviz -->
+
     <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find hk_ros_2021)/rviz_config/hk_ros_2021.rviz"/>
+
+
+    <!-- Node which retrieves coordinate transformations between odom frame and tag frame-->
+    <node pkg="hk_ros_2021" name="Tagdetect" type="tagdetect3.py" output="screen"></node>
+
+   <!-- Node which subscribes to to the topic thats made inside Tagdetect node to write down coordines into yaml file-->
+<<<<<<< HEAD
+   <!--<node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node>-->
+=======
+   <node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node>
+>>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
+
+
+
+
+
 
 </launch>
