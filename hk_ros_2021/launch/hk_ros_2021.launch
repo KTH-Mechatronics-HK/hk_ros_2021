@@ -23,21 +23,21 @@
 		<arg name="camera_frame" value="camera_rgb_optical_frame"/>
   	</include>
 
+<!--	<node pkg="hk_ros_2021" name="animalDetect_node" type="animal_location_test.py" output="screen"></node> -->
+	<!--<node pkg="hk_ros_2021" name="animaltransform" type="animalTransform.py" output="screen"></node>-->
+
 
     <!-- launch object B detector (geometric shapes) -->
+
+ 	<node pkg="shape_detection_matching" name="shape_node" type="shape_detector_node.py"></node>
 
 
     <!-- launch object C detector (animals) -->
 
 	<!--commented theses stuff below out since I dont have darknet_ros installed yet-->
 
-<<<<<<< HEAD
-	<include file="$(find darknet_ros)/launch/yolo_v3.launch">
-      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov3.yaml"/>
-=======
  	<include file="$(find darknet_ros)/launch/yolo_v3.launch">
-      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov3.yaml"/> 
->>>>>>> b236d4cc85e9a4c54949d3e8cdc5ea5a47c88391
+      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov2-voc.yaml"/>
       	<arg name="image" value="raspicam_node/image"/>
   	</include>
 
@@ -51,7 +51,7 @@
     <node pkg="hk_ros_2021" name="Tagdetect" type="tagdetect3.py" output="screen"></node>
 
    <!-- Node which subscribes to to the topic thats made inside Tagdetect node to write down coordines into yaml file-->
-   <node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node> 
+   <!--<node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node>-->
 
 
 
