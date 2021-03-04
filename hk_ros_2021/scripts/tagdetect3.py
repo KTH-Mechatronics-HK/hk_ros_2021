@@ -40,11 +40,10 @@ def callback(detectionarray):
         list.waitForTransform('/odom', tag_frame, rospy.Time(), rospy.Duration(1)) #Waiting for a bit to get rid of errors
         (trans,rot) = list.lookupTransform( '/static_frame',tag_frame , rospy.Time(0)) #performing the transformation
 
-        x = str(trans[0])            #Multiply with -1 to transform the given coordinates
-        y = str(trans[1])            #to match the odom frame orientation
+        x = trans[0]           #Multiply with -1 to transform the given coordinates
+        y = trans[1]           #to match the odom frame orientation
 
-        coordinates = (x + ", " + y)  #Combining x and y coordinates into a string
-        print(coordinates)
+
         #return coordinates
 
     except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException, IndexError):
@@ -53,7 +52,8 @@ def callback(detectionarray):
 
     coordinates_info = Coordinates()
 
-    coordinates_info.coord = coordinates
+    coordinates_info.x_coord = x
+    coordinates_info.y_coord = y
     coordinates_info.tag = tag_frame
 
     try:

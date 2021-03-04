@@ -3,19 +3,15 @@ import rospy
 import tf2_ros
 import tf2_msgs.msg
 import geometry_msgs.msg
-<<<<<<< HEAD
 from apriltag_ros.msg import animalpixels
-=======
-from apriltag_ros.msg import Coordinates
->>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
 
 def callback(coordinates):
 
     x = coordinates.animal_x
 
     y = coordinates.animal_y
-    print(x)
-    print(y)
+    #print(x)
+    #print(y)
     tfb = FixedTFBroadcaster(x,y)
 
 class FixedTFBroadcaster:
@@ -45,11 +41,7 @@ class FixedTFBroadcaster:
 
 if __name__ == '__main__':
     rospy.init_node('fixed_tf2_broadcaster')
-<<<<<<< HEAD
     pub = rospy.Subscriber('animal_info', animalpixels , callback)
-=======
-    pub = rospy.Subscriber('animal_info', Coordinates , callback)
->>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
 
     #tfb = FixedTFBroadcaster()
 

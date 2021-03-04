@@ -57,7 +57,7 @@ def callback1(animalBox): #function for calculating relative
 
 
         #CALCULATING
-        if animalType in ['cat', 'cow', 'dog', 'horse', 'boat']: #if class is one of these animals
+        if animalType in ['cat', 'cow', 'dog', 'horse']: #if class is one of these animals
             print(animalType)
             x_max = animalBox.bounding_boxes[0].xmax
             x_min = animalBox.bounding_boxes[0].xmin

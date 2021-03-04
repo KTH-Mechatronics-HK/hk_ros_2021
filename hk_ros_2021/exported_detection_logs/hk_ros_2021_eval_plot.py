@@ -10,15 +10,15 @@ plt.close()
 stream = open("ground_truth.yaml", "r")
 yamldocs_gt = yaml.load_all(stream,Loader=yaml.SafeLoader)
 dets_gt = []
-for entry in yamldocs_gt: 
+for entry in yamldocs_gt:
     dets_gt.append(entry)
 
 # load output file to evaluate
-filename_eval = "example_output_file.yaml"
+filename_eval = "latest_output_file.yaml"
 stream = open(filename_eval, "r")
 yamldocs_eval = yaml.load_all(stream,Loader=yaml.SafeLoader)
 dets_eval = []
-for entry in yamldocs_eval: 
+for entry in yamldocs_eval:
     if (len(dets_eval) < len(dets_gt)):   # Only the first len(dets_gt) detections will be counted (to prevent cheating by just randomly placing objects)
         dets_eval.append(entry)
 
@@ -36,7 +36,7 @@ for det in dets_gt:
         mB, = ax.plot(det["XY_pos"][0],det["XY_pos"][1], markerstyle)
     elif(det["obj_type"] == "C"):
         markerstyle = "go"
-        mC, = ax.plot(det["XY_pos"][0],det["XY_pos"][1], markerstyle)  
+        mC, = ax.plot(det["XY_pos"][0],det["XY_pos"][1], markerstyle)
 
 # plot eval detections
 for det in dets_eval:
@@ -51,7 +51,7 @@ for det in dets_eval:
         ax.plot(det["XY_pos"][0],det["XY_pos"][1], markerstyle)
     else:
         print "WARNING! Faulty obj_type in eval file"
-        
+
 ax.legend((mA, mB, mC), ('A', 'B', 'C'))
-ax.set_aspect('equal', 'box') 
+ax.set_aspect('equal', 'box')
 plt.show()

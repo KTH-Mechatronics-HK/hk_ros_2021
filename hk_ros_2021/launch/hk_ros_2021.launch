@@ -7,7 +7,7 @@
     <node name="republish" type="republish" pkg="image_transport" output="screen" args="compressed in:=/raspicam_node/image raw out:=/raspicam_node/image" />
 
     <!-- Launch a static_frame to get more accurate transformations-->
-    <node pkg="tf" type="static_transform_publisher" name="static_frame_broadcaster" args="0 0 0 3.31 0 0 /map /static_frame 100" /> <!--Tested rotations: 3.31, 3.4, 3.35 -->
+    <node pkg="tf" type="static_transform_publisher" name="static_frame_broadcaster" args="-0.146 0.101 0 0 0 0.5149 0.8572 /map /static_frame 100" /> <!--Tested rotations: 3.31, 3.4, 3.35 --> <!-- 3.31 x y z yaw roll pitch--> <!-- x y z qx qy qz qw -->
                                                                                                                                      <!-- 3.31 gave the best result-->
     <!-- launch localization (hint: check out the preinstalled "turtlebot3_slam" package) -->
 	<include file="$(find turtlebot3_slam)/launch/turtlebot3_slam.launch">
@@ -23,13 +23,18 @@
 		<arg name="camera_frame" value="camera_rgb_optical_frame"/>
   	</include>
 
-<!--	<node pkg="hk_ros_2021" name="animalDetect_node" type="animal_location_test.py" output="screen"></node> -->
-	<!--<node pkg="hk_ros_2021" name="animaltransform" type="animalTransform.py" output="screen"></node>-->
+  	<node pkg="hk_ros_2021" name="animalDetect_node" type="animal_location_test.py" output="screen"></node>
+	<node pkg="hk_ros_2021" name="animaltransform" type="animalTransform.py" output="screen"></node>
+  	<node pkg="hk_ros_2021" name="Coordinates_animal_gemotricransform" type="animalcoordinates.py" output="screen"></node>
 
 
     <!-- launch object B detector (geometric shapes) -->
 
  	<node pkg="shape_detection_matching" name="shape_node" type="shape_detector_node.py"></node>
+
+  <node pkg="hk_ros_2021" name="geometricDetect_node" type="geometric_location.py" output="screen"></node>
+  <node pkg="hk_ros_2021" name="geometrictransform" type="geometricTransform.py" output="screen"></node>
+  <node pkg="hk_ros_2021" name="Coordinates_geometric" type="geometriccoordinates.py" output="screen"></node>
 
 
     <!-- launch object C detector (animals) -->
@@ -37,11 +42,9 @@
 	<!--commented theses stuff below out since I dont have darknet_ros installed yet-->
 
  	<include file="$(find darknet_ros)/launch/yolo_v3.launch">
-<<<<<<< HEAD
-      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov2-voc.yaml"/>
-=======
-      	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov2-tiny-voc.yaml"/>
->>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
+
+	<arg name="network_param_file"  value="$(find darknet_ros)/config/yolov3.yaml"/>
+
       	<arg name="image" value="raspicam_node/image"/>
   	</include>
 
@@ -55,11 +58,9 @@
     <node pkg="hk_ros_2021" name="Tagdetect" type="tagdetect3.py" output="screen"></node>
 
    <!-- Node which subscribes to to the topic thats made inside Tagdetect node to write down coordines into yaml file-->
-<<<<<<< HEAD
-   <!--<node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node>-->
-=======
-   <node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node>
->>>>>>> 452c716960c992759f09e1de29600bfcfbb187ce
+
+    <node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node>
+
 
 
 
