@@ -268,7 +268,7 @@ if __name__ == '__main__':
     pubC = rospy.Subscriber('animalcoord', animalcoord , callbackC)
 
 
-    rospy.sleep(252)  #209
+    rospy.sleep(252.2)  #209
     print("Got to end")
     endstuffA()
     endstuffB()
