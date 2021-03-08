@@ -41,7 +41,7 @@ class FixedTFBroadcaster:
 
 if __name__ == '__main__':
     rospy.init_node('fixed_tf2_broadcaster')
-    pub = rospy.Subscriber('animal_info', animalpixels , callback)
+    pub = rospy.Subscriber('Animal_info', animalpixels , callback)
 
     #tfb = FixedTFBroadcaster()
 

@@ -21,7 +21,7 @@ from apriltag_ros.msg import animalcoord
 from std_msgs.msg import String
 
 
-rospy.init_node('Coordinates_animal_gemotric',anonymous = True)
+rospy.init_node('Animalcoords',anonymous = True)
 list = tf.TransformListener()
 
 def callback(animal_geometric):
@@ -30,7 +30,7 @@ def callback(animal_geometric):
     #pub = rospy.Subscriber('tag_detections', AprilTagDetection , chatter_callback)
     #rospy.init_node('odom_tag9',anonymous = True)
     #msg = rospy.wait_for_message("/tag_detections", Pose)
-    pub = rospy.Publisher('animalcoord', animalcoord, queue_size=10)  #Create a chatter node, so we can retrieve coordinates into yaml file
+    pub = rospy.Publisher('Animal_chatter', animalcoord, queue_size=10)  #Create a chatter node, so we can retrieve coordinates into yaml file
     #rospy.init_node('talker', anonymous=True)
     #list = tf.TransformListener()
     #rate = rospy.Rate(1) # 10hz
@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
     #rospy.init_node('odom_tag9',anonymous = True)
 
-    sub1 = rospy.Subscriber('/animal_info', animalpixels , callback)
+    sub1 = rospy.Subscriber('/Animal_info', animalpixels , callback)
 
    #rate = rospy.Rate(1) # 10hz
     rospy.spin()

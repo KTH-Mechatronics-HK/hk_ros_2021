@@ -42,7 +42,7 @@ class FixedTFBroadcaster:
 
 if __name__ == '__main__':
     rospy.init_node('fixed_tf2_broadcaster_geo')
-    pub = rospy.Subscriber('geometric_info', geometricrelcoords , callback)
+    pub = rospy.Subscriber('Shape_info', geometricrelcoords , callback)
 
     #tfb = FixedTFBroadcaster()
 

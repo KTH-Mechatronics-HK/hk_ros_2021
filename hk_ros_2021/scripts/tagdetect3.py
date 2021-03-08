@@ -17,7 +17,7 @@ from apriltag_ros.msg import Coordinates
 from std_msgs.msg import String
 
 
-rospy.init_node('Coordinates_node',anonymous = True)
+rospy.init_node('AprilTagcoords',anonymous = True)
 list = tf.TransformListener()
 
 def callback(detectionarray):
@@ -26,7 +26,7 @@ def callback(detectionarray):
     #pub = rospy.Subscriber('tag_detections', AprilTagDetection , chatter_callback)
     #rospy.init_node('odom_tag9',anonymous = True)
     #msg = rospy.wait_for_message("/tag_detections", Pose)
-    pub = rospy.Publisher('chatter', Coordinates, queue_size=10)  #Create a chatter node, so we can retrieve coordinates into yaml file
+    pub = rospy.Publisher('AprilTag_chatter', Coordinates, queue_size=10)  #Create a chatter node, so we can retrieve coordinates into yaml file
     #rospy.init_node('talker', anonymous=True)
     #list = tf.TransformListener()
     #rate = rospy.Rate(1) # 10hz

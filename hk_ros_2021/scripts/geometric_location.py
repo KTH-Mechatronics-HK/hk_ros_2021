@@ -42,7 +42,7 @@ from std_msgs.msg import String
 #float32[] ranges
 #float32[] intensities
 
-rospy.init_node('geometricDetect_node',anonymous = False)
+rospy.init_node('Shapepixelcoords',anonymous = False)
 
 # lidar_angle = None
 class lidar:
@@ -125,7 +125,7 @@ class lidar:
         return
 
     def get_hit(self):
-        pub = rospy.Publisher('geometric_info', geometricrelcoords, queue_size=10)
+        pub = rospy.Publisher('Shape_info', geometricrelcoords, queue_size=10)
 
         animalDistance = self.ranges[self.lidar_angle]
         print(animalDistance)

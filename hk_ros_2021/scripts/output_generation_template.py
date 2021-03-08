@@ -263,9 +263,9 @@ if __name__ == '__main__':
     running = True
 
     rospy.init_node('yaml_node',anonymous = True)
-    pubA = rospy.Subscriber('chatter', Coordinates , callbackA)
-    pubB = rospy.Subscriber('geometriccoord', geometriccoords , callbackB)
-    pubC = rospy.Subscriber('animalcoord', animalcoord , callbackC)
+    pubA = rospy.Subscriber('AprilTag_chatter', Coordinates , callbackA)
+    pubB = rospy.Subscriber('Shape_chatter', geometriccoords , callbackB)
+    pubC = rospy.Subscriber('Animal_chatter', animalcoord , callbackC)
 
 
     rospy.sleep(252.2)  #209

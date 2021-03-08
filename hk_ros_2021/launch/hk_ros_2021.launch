@@ -23,18 +23,18 @@
 		<arg name="camera_frame" value="camera_rgb_optical_frame"/>
   	</include>
 
-  	<node pkg="hk_ros_2021" name="animalDetect_node" type="animal_location_test.py" output="screen"></node>
-	<node pkg="hk_ros_2021" name="animaltransform" type="animalTransform.py" output="screen"></node>
-  	<node pkg="hk_ros_2021" name="Coordinates_animal_gemotricransform" type="animalcoordinates.py" output="screen"></node>
+  	<node pkg="hk_ros_2021" name="Animalpixelcoords" type="animal_location_test.py" output="screen"></node>
+	<node pkg="hk_ros_2021" name="Animalframe" type="animalTransform.py" output="screen"></node>
+  	<node pkg="hk_ros_2021" name="Animalcoords" type="animalcoordinates.py" output="screen"></node>
 
 
     <!-- launch object B detector (geometric shapes) -->
 
  	<node pkg="shape_detection_matching" name="shape_node" type="shape_detector_node.py"></node>
 
-  <node pkg="hk_ros_2021" name="geometricDetect_node" type="geometric_location.py" output="screen"></node>
-  <node pkg="hk_ros_2021" name="geometrictransform" type="geometricTransform.py" output="screen"></node>
-  <node pkg="hk_ros_2021" name="Coordinates_geometric" type="geometriccoordinates.py" output="screen"></node>
+  <node pkg="hk_ros_2021" name="Shapepixelcoords" type="geometric_location.py" output="screen"></node>
+  <node pkg="hk_ros_2021" name="Shapeframe" type="geometricTransform.py" output="screen"></node>
+  <node pkg="hk_ros_2021" name="Shapecoords" type="geometriccoordinates.py" output="screen"></node>
 
 
     <!-- launch object C detector (animals) -->
@@ -55,11 +55,11 @@
 
 
     <!-- Node which retrieves coordinate transformations between odom frame and tag frame-->
-    <node pkg="hk_ros_2021" name="Tagdetect" type="tagdetect3.py" output="screen"></node>
+    <node pkg="hk_ros_2021" name="AprilTagcoords" type="tagdetect3.py" output="screen"></node>
 
    <!-- Node which subscribes to to the topic thats made inside Tagdetect node to write down coordines into yaml file-->
 
-    <node pkg="hk_ros_2021" name="Yamlfile" type="output_generation_template.py" output="screen"></node>
+    <node pkg="hk_ros_2021" name="Yamlfile_node" type="output_generation_template.py" output="screen"></node>
 
 
 
